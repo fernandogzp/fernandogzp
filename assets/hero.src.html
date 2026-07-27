@@ -1,0 +1,232 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--crim:#C0392B;--crimhot:#E74C3C;--fg:#f6f6f8;--fg2:#8f8f99;--fg3:#5c5c66}
+  *{margin:0;box-sizing:border-box}html,body{background:#000}
+  .banner{position:relative;width:1600px;height:640px;overflow:hidden;background:#050506;font-family:'IBM Plex Mono',monospace}
+  .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:40px 40px;
+    -webkit-mask-image:radial-gradient(120% 120% at 30% 40%,#000 30%,transparent 78%);mask-image:radial-gradient(120% 120% at 30% 40%,#000 30%,transparent 78%);}
+  #mx{position:absolute;inset:0;mix-blend-mode:screen}
+  .stage{position:absolute;inset:0;transform-origin:center center}
+  .br{position:absolute;width:28px;height:28px;border:1.5px solid rgba(255,255,255,.42);opacity:0}
+  .tl{top:36px;left:36px;border-right:0;border-bottom:0}.tr{top:36px;right:36px;border-left:0;border-bottom:0}
+  .bl{bottom:36px;left:36px;border-right:0;border-top:0}.brr{bottom:36px;right:36px;border-left:0;border-top:0}
+  .brand{position:absolute;left:96px;top:54px}.brand img{height:26px;opacity:0}
+  .hud{position:absolute;right:64px;top:56px;text-align:right;font-size:12px;letter-spacing:.14em;line-height:1.7;color:rgba(255,255,255,.4)}
+  .hud .a{color:var(--crimhot)}
+  .name{position:absolute;left:96px;top:140px;font-family:'Playfair Display',serif;font-weight:700;font-size:76px;line-height:1;color:var(--fg);letter-spacing:.004em;height:86px;
+    -webkit-box-reflect:below 2px linear-gradient(to bottom,rgba(0,0,0,.13) 0%,transparent 22%);}
+  .rule{position:absolute;left:96px;top:250px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.82),rgba(255,255,255,0));width:0}
+  .rule .seed{position:absolute;left:0;top:-1px;width:22px;height:3px;background:var(--crimhot);opacity:.9}
+  .rowr{position:absolute;left:96px;display:flex;align-items:baseline;gap:16px}
+  .r1{top:292px}.r2{top:352px}
+  .tag{font-size:15px;letter-spacing:.24em;color:var(--fg2);text-transform:uppercase;width:152px;flex:none}
+  .t1{font-weight:600;font-size:35px;letter-spacing:.08em;color:var(--fg);text-transform:uppercase;white-space:pre}
+  .t2{font-weight:600;font-size:26px;letter-spacing:.08em;color:#ced0d8;text-transform:uppercase;white-space:pre}
+  .cur{color:var(--crimhot);font-weight:400}
+  .marks{position:absolute;right:78px;top:120px;display:flex;align-items:flex-start;gap:44px}
+  .divm{width:1px;height:150px;margin-top:34px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.13),transparent)}
+  .mk{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .mk .cap{font-size:12px;letter-spacing:.28em;color:var(--fg2);text-transform:uppercase;opacity:0;order:-1}
+  .mk .wrap{width:118px;height:118px;-webkit-box-reflect:below 5px linear-gradient(to bottom,rgba(0,0,0,.32) 0%,transparent 68%);}
+  .mk .wrap svg{width:118px;height:118px;display:block;overflow:visible}
+  .aidraw{fill:#f6f6f8;stroke:#f6f6f8;stroke-width:15;stroke-linejoin:round;stroke-linecap:round;fill-opacity:0;stroke-opacity:0}
+  .mirseam{position:absolute;left:6px;right:6px;height:1px;top:118px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);opacity:0}
+  .rail{position:absolute;left:96px;top:410px;width:1408px}
+  .railline{position:absolute;left:104px;top:10px;height:1px;background:rgba(255,255,255,.13);width:0}
+  .slabel{position:absolute;left:0;top:1px;font-size:15px;letter-spacing:.24em;color:var(--fg2);text-transform:uppercase;opacity:0}
+  .groups{position:absolute;left:0;top:34px;display:flex;gap:24px;align-items:center;flex-wrap:nowrap}
+  .cell{height:42px;display:flex;align-items:center;justify-content:center;opacity:0}
+  .cell img{height:42px;width:auto;display:block}
+  .cell img.wm{height:24px}
+  .cell img.whiten{filter:brightness(0) invert(1)}
+  .pills{position:absolute;left:0;top:106px;display:flex;gap:12px;align-items:center}
+  .pill{display:flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid rgba(255,255,255,.17);border-radius:5px;background:rgba(255,255,255,.02);font-size:12.5px;letter-spacing:.1em;color:rgba(255,255,255,.6);text-transform:uppercase;white-space:nowrap;opacity:0}
+  .pill img.pi{height:15px;width:auto;display:block}
+  .pill img.whiten{filter:brightness(0) invert(1)}
+  .pill b{color:var(--fg);font-weight:600}
+  .pill .pd{width:5px;height:5px;border-radius:50%;background:var(--crimhot)}
+  .foot{position:absolute;bottom:40px;font-size:13px;letter-spacing:.14em}
+  .fl{left:96px;color:rgba(255,255,255,.38)}
+  .fr{right:96px;color:rgba(255,255,255,.55);text-align:right}
+  .fr .dot{color:var(--crimhot)}
+  .scan{position:absolute;left:0;right:0;height:2px;top:-20px;pointer-events:none;background:linear-gradient(90deg,rgba(231,76,60,0),rgba(231,76,60,.8) 50%,rgba(231,76,60,0));box-shadow:0 0 18px 3px rgba(231,76,60,.28);opacity:0}
+  .scanlines{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);opacity:.3;mix-blend-mode:multiply}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 100% at 50% 42%,transparent 55%,rgba(0,0,0,.5) 100%)}
+  .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+  .shutter{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+</style></head>
+<body>
+<div class="banner">
+  <canvas id="mx" width="1600" height="640"></canvas>
+  <div class="stage" id="stage">
+    <div class="br tl"></div><div class="br tr"></div><div class="br bl"></div><div class="br brr"></div>
+    <div class="brand"><img src="marks/logo-dark.svg" alt="Reflejo" id="brand"></div>
+    <div class="name" id="name"></div>
+    <div class="rule" id="rule"><span class="seed"></span></div>
+    <div class="rowr r1"><span class="tag" id="tag1">Role &nbsp;/&nbsp;</span><span class="t1" id="t1"></span></div>
+    <div class="rowr r2"><span class="tag" id="tag2">Degree &nbsp;/&nbsp;</span><span class="t2" id="t2"></span></div>
+    <div class="marks">
+      <div class="mk" id="m1">
+        <div class="wrap">
+          <svg id="aisvg" viewBox="116 128 754 754" xmlns="http://www.w3.org/2000/svg">
+            <path class="aidraw" id="aiBodyA" d="M508.25,352.94c-16.59-39.29-65.78-44.6-103.14-44.84-25.46-.16-52.99,1.8-76.15,12.68-14.08,6.62-25.17,17.63-30.71,32.22-3.5,10.04-5.05,20.32-5.49,31.12v363.69s-50.55,0-50.55,0v-368.99c.52-13.15,1.98-25.87,5.66-38.31,17.76-64.95,93.9-75.15,151-75.62,19.06-.16,37.54.61,56.36,3.24,44.51,6.23,90.37,25.23,103.02,72.61,3.73,12.8,5.13,25.52,5.61,38.95l.02,69.06-49.33.02v-64.26c-.51-11.09-2.3-21.36-6.32-31.6Z"></path>
+            <path class="aidraw" id="aiBodyB" d="M695.65,521.16l-.08,68.71c-.02,14.08-2.1,27.39-5.93,40.76-7.87,27.47-27.41,46.53-53.18,57.73-22.39,9.73-47.25,13.97-71.63,15.62-20.33,1.38-40.29,1.35-60.61-.03-50.65-3.44-109.42-19.36-124.56-74.61-3.92-13.42-5.35-26.8-5.69-40.9l-.02-67.34,49.37-.02.03,64.45c.46,11.22,2.38,21.6,6.5,31.94,17.28,39.88,68.89,44.48,106.8,44.27,25.05-.13,52.61-2.44,75.04-14.1,13.03-6.78,23.03-17.62,28.13-31.36,3.48-10.39,4.97-20.65,5.31-31.7v-63.42s50.53-.01,50.53-.01Z"></path>
+            <circle class="aidraw" id="aiEyeL" cx="397.68" cy="421.2" r="48.37"></circle>
+            <circle class="aidraw" id="aiEyeR" cx="670.08" cy="421.2" r="48.37"></circle>
+          </svg>
+          <div class="mirseam" id="seam1"></div>
+        </div>
+        <div class="cap" id="cap1">Agents</div>
+      </div>
+      <div class="divm"></div>
+      <div class="mk" id="m2">
+        <div class="wrap">
+          <svg id="secsvg" viewBox="152 40 760 760" xmlns="http://www.w3.org/2000/svg">
+            <path class="aidraw secd" d="M256.419586,549.063110 C256.589111,587.855286 256.765564,626.157593 256.918060,664.460022 C256.949493,672.355225 256.908325,672.365845 248.967209,672.368408 C224.139938,672.376526 199.312378,672.315369 174.485718,672.440674 C170.524384,672.460632 168.813141,671.386536 168.818054,667.101624 C168.935776,564.461365 168.530090,461.818237 169.221161,359.182373 C169.455032,324.446350 176.446030,290.673157 193.219467,259.652618 C213.831085,221.533813 245.530548,196.293549 285.827545,181.598328 C320.585663,168.922989 356.595825,164.882828 393.427582,167.556213 C423.592773,169.745712 452.651245,176.221741 479.890594,189.762589 C531.208130,215.272888 560.475464,257.144806 571.478516,312.754791 C575.639160,333.783081 576.658203,354.972931 576.438599,376.311096 C576.401733,379.893799 575.303040,381.362213 571.559387,381.347595 C545.565918,381.246094 519.571533,381.232971 493.578278,381.359253 C489.361481,381.379761 488.593628,379.369690 488.674988,375.805695 C489.093994,357.449249 488.133514,339.216492 483.685730,321.289307 C473.252991,279.239227 441.797150,250.634277 398.927734,244.250977 C376.252930,240.874680 353.715332,241.213211 331.686798,247.946320 C293.129303,259.731628 270.337555,286.157349 261.300537,325.063324 C257.887421,339.757355 257.098267,354.668091 256.886810,369.673370 C256.046417,429.305328 256.563354,488.940094 256.419586,549.063110 z"></path>
+            <path class="aidraw secd" d="M616.573120,662.562256 C581.699951,652.366699 552.272705,634.419983 529.470520,606.338257 C510.326019,582.761230 499.649445,555.361633 493.781158,525.868164 C489.935333,506.539642 488.417877,487.012939 488.652008,467.313965 C488.699402,463.326904 489.831482,461.676941 494.070312,461.698700 C519.731323,461.830566 545.393921,461.825989 571.054810,461.670807 C575.290710,461.645203 576.326477,463.258850 576.464600,467.240997 C577.197632,488.376892 578.355713,509.476868 585.005371,529.823181 C596.546021,565.134827 620.720703,586.176636 656.892883,593.891602 C681.377136,599.113708 705.884949,599.145691 730.187378,593.499268 C770.986816,584.020081 794.601501,557.546204 803.615112,517.261414 C807.375732,500.453949 808.598206,483.380768 808.602722,466.199677 C808.627930,369.051819 808.645325,271.903961 808.665771,174.756088 C808.667419,166.900864 808.668518,166.874359 816.682190,166.872925 C841.010498,166.868530 865.339783,166.999695 889.666382,166.801804 C894.622253,166.761490 896.310303,168.193283 896.303528,173.306717 C896.169373,275.119843 896.537842,376.934967 895.994568,478.745422 C895.807495,513.808899 889.656921,548.009644 873.048889,579.556580 C852.399963,618.779358 820.440918,644.771545 778.842346,659.100159 C739.551880,672.633850 699.130005,674.996704 658.063721,670.539368 C644.126343,669.026611 630.432556,666.491577 616.573120,662.562256 z"></path>
+            <path class="aidraw secd" d="M421.744385,453.666382 C407.402008,474.485657 383.144043,483.794556 358.443268,478.179108 C335.470490,472.956512 317.289154,452.433929 313.522095,428.116730 C307.855133,391.535309 337.536560,356.639557 377.796173,359.928009 C422.422485,363.573181 446.707855,412.930145 423.311310,451.275055 C422.878082,451.985077 422.403870,452.670135 421.744385,453.666382 z"></path>
+            <path class="aidraw secd" d="M639.527710,447.345398 C621.329102,412.359375 641.739990,369.806610 679.098206,361.298523 C713.283752,353.512939 746.506409,376.217407 751.421753,411.107178 C756.518250,447.282776 729.908936,479.304230 693.412048,479.760773 C669.391174,480.061249 651.453125,468.674469 639.527710,447.345398 z"></path>
+          </svg>
+          <div class="mirseam" id="seam2"></div>
+        </div>
+        <div class="cap" id="cap2">Security</div>
+      </div>
+    </div>
+    <div class="rail">
+      <div class="railline" id="railline"></div>
+      <div class="slabel" id="slabel">Stack</div>
+      <div class="groups" id="groups"></div>
+      <div class="pills" id="pills"></div>
+    </div>
+    <div class="foot fl" id="footl">reflejo.ai</div>
+    <div class="foot fr" id="footr"></div>
+  </div>
+  <div class="scan" id="scan"></div>
+  <div class="scanlines"></div>
+  <div class="grain"></div>
+  <div class="vig"></div>
+  <div class="flash" id="flash"></div>
+  <div class="shutter" id="shutter"></div>
+</div>
+<script>
+const NAME="Fernando Gutiérrez Pardo", T1="AI Systems Engineer", T2="Chemical Engineer · Universidad de Concepción";
+const CH="01αβγδεζηθικλμνξοπρστυφχψω∑∏∂∇∞≈≠≤≥∈∉⊂⊃∪∩→←↔";
+const cv=document.getElementById('mx'),cx=cv.getContext('2d');const W=1600,H=640,FS=19,COLS=Math.ceil(W/FS);
+function rnd(i){var x=Math.sin(i*12.9898)*43758.5453;return x-Math.floor(x);}
+function cl(a,b,c){return Math.max(b,Math.min(c,a));}
+function env(t,a,b,c,d){if(t<a||t>d)return 0;if(t<b)return(t-a)/(b-a);if(t>c)return 1-(t-c)/(d-c);return 1;}
+function expo(p){p=cl(p,0,1);return 1-Math.pow(1-p,3);}
+function typed(str,t,s,e){var n=str.length;var k=Math.floor(cl((t-s)/(e-s),0,1)*n);return{d:str.slice(0,k),k:k,n:n};}
+function scr(el,str,t,s,e,cur){var r=typed(str,t,s,e);var showcur=(t>=s)&&((r.k<r.n)||cur);el.innerHTML=r.d+(showcur?'<span class="cur">&nbsp;▍</span>':'');return r;}
+// measure vector lengths for the self-draw
+var DR=document.querySelectorAll('.aidraw');
+DR.forEach(function(el){var L;try{L=el.getTotalLength();}catch(e){L=760;}el.__len=L;el.style.strokeDasharray=L;el.style.strokeDashoffset=L;});
+function vdraw(el,s,dDur,fDelay,fDur){
+  if(t<s){el.style.strokeOpacity=0;el.style.fillOpacity=0;return;}
+  var L=el.__len;var dp=cl((t-s)/dDur,0,1);
+  el.style.strokeDashoffset=(L*(1-expo(dp))).toFixed(1);
+  el.style.strokeOpacity=(dp<1?0.95:cl(1-(t-(s+dDur))/200,0,1)).toFixed(3);
+  el.style.fillOpacity=cl((t-(s+fDelay))/fDur,0,1).toFixed(3);
+}
+// build rail — one unified strip of colored stack logos (dark-brand marks forced white for the dark banner)
+const DARKI={nextdotjs:1,django:1,ollama:1,anthropic:1,tailscale:1,sqlite:1};
+const SPECIAL={
+  oraclecloud:{url:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg', cls:'wm'},
+  aws:{url:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', cls:'wm whiten'}
+};
+const STACK=['python','typescript','react','nextdotjs','fastapi','django','docker','linux','nginx','postgresql','redis','cloudflare','tailscale','ollama','anthropic'];
+const groups=document.getElementById('groups');var CELLS=[];
+STACK.forEach(function(slug){
+  var c=document.createElement('div');c.className='cell';var sp=SPECIAL[slug];
+  var url=sp?sp.url:(DARKI[slug]?('https://cdn.simpleicons.org/'+slug+'/white'):('https://cdn.simpleicons.org/'+slug));
+  c.innerHTML='<img'+(sp?(' class="'+sp.cls+'"'):'')+' src="'+url+'" alt="'+slug+'">';
+  groups.appendChild(c);CELLS.push({el:c});
+});
+const NMOD=CELLS.length;
+// designed metric pills below the strip
+const PILLDATA=['<span class="pd"></span><span>Agentic AI</span>','<span class="pd"></span><span>Memory &amp; retrieval</span>','<span class="pd"></span><span>AI red teaming</span>','<span class="pd"></span><span>Offensive security</span>','<span class="pd"></span><span>Physics-informed ML</span>'];
+var pillsEl=document.getElementById('pills');var PILLS=[];
+PILLDATA.forEach(function(h){var d=document.createElement('div');d.className='pill';d.innerHTML=h;pillsEl.appendChild(d);PILLS.push(d);});
+// monochrome matrix — white heads, grey trails; red is rare (2%)
+// subtle, persistent background rain (honeypot-style) — no bright burst, gentle constant ambience
+function drawMatrix(t){cx.clearRect(0,0,W,H);
+  var a=cl((t-200)/800,0,1)*0.13; if(a<=0.004)return;
+  var mt=Math.min(t,7200); // rain falls through the boot, then settles (keeps the GIF small; shutter hides the loop seam)
+  cx.font=FS+"px 'IBM Plex Mono',monospace";var frame=Math.floor(mt/95);
+  for(var c=0;c<COLS;c++){
+    if(rnd(c*5.7)<0.44)continue; // sparse columns
+    var head=((rnd(c*7.1)*H)+mt*0.135*(0.5+rnd(c)*0.9))%(H+140)-70;
+    for(var j=0;j<6;j++){var y=head-j*FS;if(y<-FS||y>H)continue;var ci=Math.floor(rnd(c*31.7+Math.floor(y/FS)*3.3+frame)*CH.length);var fade=1-j/6;
+      cx.fillStyle='rgba(150,158,172,'+(0.55*fade*a).toFixed(3)+')';
+      if(j===0)cx.fillStyle='rgba(205,212,226,'+(0.8*a).toFixed(3)+')';
+      cx.fillText(CH[ci],c*FS,y);}}}
+function clipMark(id,capid,s,e){var el=document.getElementById(id);/* legacy no-op kept for safety */}
+var t=0;
+function drawFrame(tt){t=tt;
+  var stage=document.getElementById('stage'),flash=document.getElementById('flash'),shut=document.getElementById('shutter');
+  var sy=(t<520)?expo(t/520):1; var opic=cl((t-60)/300,0,1);
+  var ab=0; if(t<1000)ab=(1-cl((t-340)/660,0,1))*3;
+  if(t>16600){var q=expo((t-16600)/200);sy=1-q*0.985;}
+  if(t>16500&&t<16920){ab=cl((t-16500)/120,0,1)*3;}
+  stage.style.transform='scaleY('+sy+')';stage.style.opacity=opic;
+  stage.style.filter=ab>0.05?('drop-shadow('+ab.toFixed(1)+'px 0 rgba(255,0,60,.5)) drop-shadow(-'+ab.toFixed(1)+'px 0 rgba(0,212,255,.45))'):'none';
+  flash.style.opacity=Math.max(env(t,240,320,360,700)*0.85,(t>16600&&t<16880)?(0.7*(1-Math.abs((t-16740)/140))):0);
+  shut.style.opacity=cl((t-16880)/60,0,1)*(t<17150?1:cl(1-(t-17150)/350,0,1));
+  drawMatrix(t);
+  document.getElementById('brand').style.opacity=cl((t-4700)/500,0,1);
+  document.getElementById('railline').style.width=expo((t-3400)/500)*1300+'px';
+  document.getElementById('rule').style.width=expo((t-2850)/560)*350+'px';
+  ['tl','tr','bl','brr'].forEach(function(c,i){var b=document.querySelector('.'+c);b.style.opacity=cl((t-(420+i*45))/140,0,1);});
+  // ── eye → eye → body (AI isotipo) ──
+  vdraw(document.getElementById('aiEyeL'),900,300,190,240);
+  vdraw(document.getElementById('aiEyeR'),1240,300,190,240);
+  vdraw(document.getElementById('aiBodyA'),1620,560,400,360);
+  vdraw(document.getElementById('aiBodyB'),1760,560,400,360);
+  // mirror sweep + specular seam under AI mark as the pair completes
+  var mir=env(t,1240,1330,1440,1620);
+  document.getElementById('seam1').style.opacity=Math.max(mir*0.9,cl((t-2200)/300,0,1)*0.5);
+  // AI complete glow (rare crimson punctuation)
+  var g1=env(t,2200,2380,2560,2900);
+  document.getElementById('m1').querySelector('.wrap').style.filter=g1>0.02?'drop-shadow(0 0 '+(16*g1).toFixed(1)+'px rgba(231,76,60,'+(0.8*g1).toFixed(2)+'))':'none';
+  document.getElementById('cap1').style.opacity=cl((t-2500)/260,0,1);
+  // ── security isotipo self-draws second ──
+  document.querySelectorAll('.secd').forEach(function(el){vdraw(el,2150,780,520,420);});
+  var g2=env(t,3050,3230,3420,3760);
+  document.getElementById('m2').querySelector('.wrap').style.filter=g2>0.02?'drop-shadow(0 0 '+(14*g2).toFixed(1)+'px rgba(231,76,60,'+(0.7*g2).toFixed(2)+'))':'none';
+  document.getElementById('seam2').style.opacity=cl((t-3050)/300,0,1)*0.5;
+  document.getElementById('cap2').style.opacity=cl((t-3300)/260,0,1);
+  // ── typing (slower, cinematic) ──
+  document.getElementById('name').innerHTML='';scr(document.getElementById('name'),NAME,t,1700,3250,false);
+  document.getElementById('tag1').style.opacity=cl((t-3100)/140,0,1);
+  scr(document.getElementById('t1'),T1,t,3200,4150,true);
+  document.getElementById('tag2').style.opacity=cl((t-3900)/140,0,1);
+  scr(document.getElementById('t2'),T2,t,3950,4950,false);
+  document.querySelector('.rule .seed').style.opacity=cl((t-2850)/300,0,1)*0.9;
+  document.getElementById('slabel').style.opacity=cl((t-3900)/300,0,1)*0.85;
+  // logo stamping (starts after the type resolves)
+  var STAMP0=4200, STAG=94;
+  for(var i=0;i<NMOD;i++){var m=CELLS[i];var s=STAMP0+i*STAG;var p=cl((t-s)/260,0,1);if(t<s){m.el.style.opacity=0;continue;}
+    var im=m.el.querySelector('img');var sc,br,op;
+    if(p<0.538){var q=p/0.538;sc=2.3-(2.3-0.96)*expo(q);op=q;br=1;}else{var q2=(p-0.538)/0.462;sc=0.96+0.04*q2;br=2.0-1.0*q2;op=1;}
+    m.el.style.opacity=1;im.style.transform='scale('+sc+')';im.style.filter='brightness('+br+')';im.style.opacity=op;
+  }
+  var lastStamp=STAMP0+(NMOD-1)*STAG+140;
+  // designed pills rise in after the logos settle
+  var PILLSTART=lastStamp+140;
+  for(var i=0;i<PILLS.length;i++){var ps=PILLSTART+i*140;var pq=cl((t-ps)/340,0,1);PILLS[i].style.opacity=pq;PILLS[i].style.transform='translateY('+((1-expo(pq))*9).toFixed(1)+'px)';}
+  // HUD + counter
+  var loaded=0;for(var i=0;i<NMOD;i++){if(t>=STAMP0+i*STAG+140)loaded++;}
+  if(loaded<NMOD){document.getElementById('footr').innerHTML='LOADING MODULES '+String(loaded).padStart(2,'0')+'/'+NMOD;}
+  else{document.getElementById('footr').innerHTML='ALL MODULES LOADED <span class="dot">●</span> SECURE';}
+  document.getElementById('footl').style.opacity=cl((t-4750)/400,0,1);
+  var curEl=document.querySelector('#t1 .cur');if(curEl){curEl.style.opacity=(Math.floor(t/500)%2===0)?1:0.05;}
+  var dotEl=document.querySelector('#footr .dot');if(dotEl){dotEl.style.opacity=(0.55+0.45*(0.5+0.5*Math.sin(t/318))).toFixed(2);}
+  var sc2=document.getElementById('scan');var sp=cl((t-(lastStamp+150))/720,0,1);var scanOn=(t>lastStamp+150&&t<lastStamp+900);sc2.style.opacity=scanOn?1:0;sc2.style.top=(sp*680-20)+'px';
+}
+window.renderAt=function(ms){drawFrame(((ms%17400)+17400)%17400);};window.__TEND=17400;window.renderAt(0);
+</script>
+</body></html>
