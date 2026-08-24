@@ -46,7 +46,7 @@ Then software, then the platform. Because Reflejo is a registered security firm,
 
 What I care about most sits where the two halves meet — **AI red teaming and LLM security**: adversarial testing, prompt-injection and jailbreak / refusal evals, capability elicitation, guardrails for the agents I ship. Purple team as a posture, not an annual audit.
 
-In July 2026 Anthropic's Safeguards team reviewed that work and approved Reflejo into their **Cyber Verification Program**, the vetting that unlocks dual-use offensive security on their platform for an organization. It is an authorization, not a certificate — worth saying plainly, because *trust me, I'm one of the good ones* is precisely the claim you cannot make about yourself.
+In July 2026 Anthropic's Safeguards team reviewed that work and approved me into their **Cyber Verification Program**, the vetting that unlocks dual-use offensive security on their platform for an organization. It is an authorization, not a certificate — worth saying plainly, because *trust me, I'm one of the good ones* is precisely the claim you cannot make about yourself.
 
 The newest work is where the whole line was pointing: **reflejo-cfd**, GPU reacting-flow CFD built on physics-informed neural networks. Reacting flows, thermodynamics, transport — the physics I trained on, finally in the same loop as the ML I run. Same engineering. The reactor keeps changing.
 
