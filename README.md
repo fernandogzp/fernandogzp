@@ -4,7 +4,7 @@
 
 <sub><b>AI Systems Engineer</b> · Agentic AI &amp; LLM infrastructure · RAG &amp; retrieval · model routing · evals &nbsp;—&nbsp; Chemical Engineer, Universidad de Concepción</sub>
 
-<sub><a href="https://reflejo.ai"><img src="https://img.shields.io/badge/Web-reflejo.ai-C0392B?style=flat-square&labelColor=0b0b0f" alt="reflejo.ai"></a> &nbsp; <img src="https://img.shields.io/badge/Anthropic%20Cyber%20Verification%20Program-Reflejo%20AI%20approved%20Jul%202026-C0392B?style=flat-square&labelColor=0b0b0f" alt="Anthropic Cyber Verification Program — Reflejo AI approved July 2026"></sub>
+<sub><a href="https://reflejo.ai"><img src="https://img.shields.io/badge/Web-reflejo.ai-C0392B?style=flat-square&labelColor=0b0b0f" alt="reflejo.ai"></a> &nbsp; <img src="https://img.shields.io/badge/Anthropic%20Cyber%20Verification%20Program-Reflejo%20AI%20approved%20Jul%202026-C0392B?style=flat-square&labelColor=0b0b0f" alt="Anthropic Cyber Verification Program — approved July 2026"></sub>
 
 <sub>Open to <b>remote</b> AI / agent-infrastructure and AI-security roles &nbsp;·&nbsp; <a href="mailto:reflejo@reflejo.ai">reflejo@reflejo.ai</a></sub>
 
